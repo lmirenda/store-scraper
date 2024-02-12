@@ -5,10 +5,14 @@ name = "pypi"
 
 [packages]
 fastapi = "*"
-uvicorn = {extras = ["standard"], version = "*"}
+uvicorn = {extras = ["standard"] }
 pyppeteer = "*"
+requests = "*"
+aiohttp = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.12"
