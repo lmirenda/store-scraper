@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "store-scraper"
+version = "0.1.0"
+description = "Scraper for groceries stores"
+authors = ["Luca Mirenda <lucamateomirenda@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.2"
+pyppeteer = "^1.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
