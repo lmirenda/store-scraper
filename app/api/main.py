@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.schemas.product import Product
 from app.scrapers.tata.demo import perform_search
-from app.scrapers.tiendainglesa.demo import perform_search_async
+from app.scrapers.tiendainglesa.client import perform_search_async
 
 app = FastAPI()
 
