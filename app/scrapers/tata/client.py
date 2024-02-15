@@ -26,10 +26,12 @@ class TaTaScraperClient(BaseScraperClient):
 
     def __init__(self):
         self.regions = regions
+        self.provider = "TaTa"
+        self.base_url = "https://www.tata.com.uy/"
 
     def search_by_name(self, name: str) -> list:
 
-        referer = f"https://www.tata.com.uy/s/?q={name}&sort=score_desc&page=0"
+        referer = f"{self.base_url}s/?q={name}&sort=score_desc&page=0"
 
         headers = {
             "authority": "www.tata.com.uy",

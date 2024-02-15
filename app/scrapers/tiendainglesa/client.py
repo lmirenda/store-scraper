@@ -7,8 +7,12 @@ from app.scrapers.base import BaseScraperClient
 
 class TiendaInglesaClient(BaseScraperClient):
 
+    def __init__(self):
+        self.provider = "Tienda Inglesa"
+        self.base_url = "https://www.tiendainglesa.com.uy/"
+
     async def search_by_name(self, name: str) -> list:
-        url = f"https://www.tiendainglesa.com.uy/supermercado/busqueda?0,0,{name},0"
+        url = f"{self.base_url}supermercado/busqueda?0,0,{name},0"
         browser = await launch()
         page = await browser.newPage()
         await page.goto(url)
