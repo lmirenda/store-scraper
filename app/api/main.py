@@ -1,18 +1,22 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 
+from app.repositories.product import ProductRepository
 from app.schemas.product import Product
-from app.scrapers.tata.client import perform_search
-from app.scrapers.tiendainglesa.client import perform_search_async
 
 app = FastAPI()
 
 
-@app.get("/")
+@app.get("/healthcheck")
 def read_root():
-    return {"Hello": "World"}
+    return {"Status": "Online"}
 
 
 @app.get("/products", response_model=list[Product])
-async def get_products(name: str = None, page: int = 1, limit: int = 10) -> list:
-    tata_products = perform_search(name)
-    return tata_products
+async def get_products(
+    repository: ProductRepository = Depends(ProductRepository),
+    name: str = None,
+    page: int = 1,
+    limit: int = 10,
+) -> list[Product]:
+    products = await repository.get_by_name(name)
+    return products
