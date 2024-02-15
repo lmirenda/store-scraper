@@ -1,3 +1,5 @@
+import asyncio
+
 import requests
 
 from app.scrapers.base import BaseScraperClient
@@ -24,12 +26,16 @@ regions = {
 
 class TaTaScraperClient(BaseScraperClient):
 
-    def __init__(self):
-        self.regions = regions
-        self.provider = "TaTa"
-        self.base_url = "https://www.tata.com.uy/"
+    regions = regions
+    provider = "TaTa"
+    base_url = "https://www.tata.com.uy/"
 
-    def search_by_name(self, name: str) -> list:
+    def __init__(self):
+        super().__init__()
+
+    async def search_by_name(self, name: str) -> list:
+
+        await asyncio.sleep(1)
 
         referer = f"{self.base_url}s/?q={name}&sort=score_desc&page=0"
 
@@ -72,8 +78,8 @@ class TaTaScraperClient(BaseScraperClient):
                 "name": node["name"],
                 "regular_price": price,
                 "discount_price": price,
-                "redirect_url": "tata.com.uy",
-                "provider": "TaTa",
+                "redirect_url": self.base_url,
+                "provider": self.provider,
             }
             products.append(product_data)
         return products

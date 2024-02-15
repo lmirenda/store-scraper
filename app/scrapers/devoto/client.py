@@ -7,9 +7,11 @@ from app.scrapers.base import BaseScraperClient
 
 class DevotoScraperClient(BaseScraperClient):
 
+    provider: str = "Devoto"
+    base_url: str = "https://www.devoto.com.uy/"
+
     def __init__(self):
-        self.provider = "Devoto"
-        self.base_url = "https://www.devoto.com.uy/"
+        super().__init__()
 
     def search_by_name(self, name: str) -> list:
 

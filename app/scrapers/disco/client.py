@@ -1,3 +1,4 @@
+import asyncio
 import json
 
 import requests
@@ -7,11 +8,15 @@ from app.scrapers.base import BaseScraperClient
 
 class DiscoScraperClient(BaseScraperClient):
 
-    def __init__(self):
-        self.provider = "Disco"
-        self.base_url = "https://www.disco.com.uy/"
+    provider = "Disco"
+    base_url = "https://www.disco.com.uy/"
 
-    def search_by_name(self, name: str) -> list:
+    def __init__(self):
+        super().__init__()
+
+    async def search_by_name(self, name: str) -> list:
+
+        await asyncio.sleep(1)
 
         headers = {
             "sec-ch-ua": '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
@@ -37,17 +42,19 @@ class DiscoScraperClient(BaseScraperClient):
         products = products_dict["productSearch"]["products"]
 
         for product in products:
+            discount_str = str(product["priceRange"]["sellingPrice"]["lowPrice"])
+            regular_str = str(product["priceRange"]["sellingPrice"]["highPrice"])
 
             discount_price = {
-                "amount": product["priceRange"]["sellingPrice"]["lowPrice"],
+                "amount": str.replace(discount_str, ".", ""),
                 "currency": "UYU",
-                "decimal_places": 0,
+                "decimal_places": 2,
             }
 
             regular_price = {
-                "amount": product["priceRange"]["sellingPrice"]["highPrice"],
+                "amount": str.replace(regular_str, ".", ""),
                 "currency": "UYU",
-                "decimal_places": 0,
+                "decimal_places": 2,
             }
 
             product_data = {

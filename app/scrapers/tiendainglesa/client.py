@@ -1,3 +1,4 @@
+import asyncio
 import re
 from pyppeteer import launch
 
@@ -7,9 +8,11 @@ from app.scrapers.base import BaseScraperClient
 
 class TiendaInglesaScraperClient(BaseScraperClient):
 
+    provider = "Tienda Inglesa"
+    base_url = "https://www.tiendainglesa.com.uy/"
+
     def __init__(self):
-        self.provider = "Tienda Inglesa"
-        self.base_url = "https://www.tiendainglesa.com.uy/"
+        super().__init__()
 
     async def search_by_name(self, name: str) -> list:
         url = f"{self.base_url}supermercado/busqueda?0,0,{name},0"

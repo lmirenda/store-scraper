@@ -1,3 +1,4 @@
+import asyncio
 import json
 
 import requests
@@ -7,11 +8,15 @@ from app.scrapers.base import BaseScraperClient
 
 class GeantScraperClient(BaseScraperClient):
 
-    def __init__(self):
-        self.provider = "Geant"
-        self.base_url = "https://www.geant.com.uy/"
+    provider = "Geant"
+    base_url = "https://www.geant.com.uy/"
 
-    def search_by_name(self, name: str) -> list:
+    def __init__(self):
+        super().__init__()
+
+    async def search_by_name(self, name: str) -> list:
+
+        await asyncio.sleep(1)
 
         headers = {
             "sec-ch-ua": '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
