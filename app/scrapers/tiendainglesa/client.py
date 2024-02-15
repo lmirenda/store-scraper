@@ -5,7 +5,7 @@ from app.schemas.money import Money
 from app.scrapers.base import BaseScraperClient
 
 
-class TiendaInglesaClient(BaseScraperClient):
+class TiendaInglesaScraperClient(BaseScraperClient):
 
     def __init__(self):
         self.provider = "Tienda Inglesa"
