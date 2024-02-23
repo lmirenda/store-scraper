@@ -1,18 +1,13 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-from app.db.database import get_session, create_db_and_tables
+from app.db.database import get_session
 from app.dependencies.pagination import PaginationQuery
 from app.models.api_keys import ApiKeyModel
 from app.repositories.product import ProductRepository
 from app.schemas.product import Product
 
 app = FastAPI()
-
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
 
 
 @app.get("/healthcheck")

@@ -1,10 +1,9 @@
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import create_engine, Session, SQLModel
 
-from migrations.env import DATABASE_URL
+DATABASE_URL = "postgresql://user:password@0.0.0.0:5432/store-scraper-db"
 
-connect_args = {"check_same_thread": False}
-engine = create_engine(DATABASE_URL, connect_args=connect_args, echo=True)
+engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -14,7 +13,3 @@ def get_session():
             yield session
     finally:
         session.close()
-
-
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
