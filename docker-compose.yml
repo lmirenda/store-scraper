@@ -1,0 +1,17 @@
+version: "3.8"
+
+volumes:
+  fast-api-db:
+
+
+services:
+
+  fast-api-db:
+    image: postgres:13
+    container_name: fast-api-db
+    env_file:
+      - .env
+    volumes:
+        - fast-api-db:/var/lib/postgresql/data
+    ports:
+        - "5432:5432"

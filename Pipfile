@@ -10,6 +10,9 @@ pyppeteer = "*"
 requests = "*"
 aiohttp = "*"
 beautifulsoup4 = "*"
+sqlalchemy = "*"
+sqlmodel = "*"
+alembic = "*"
 
 [dev-packages]
 black = "*"
