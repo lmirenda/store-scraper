@@ -1,4 +1,8 @@
 ## Installation:
+0 - Copy example.env to .env
+``` bash
+cp example.env .env
+```
 
 1 - Install pipenv
 ```
