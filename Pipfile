@@ -10,6 +10,12 @@ pyppeteer = "*"
 requests = "*"
 aiohttp = "*"
 beautifulsoup4 = "*"
+sqlalchemy = "*"
+sqlmodel = "*"
+alembic = "*"
+python-decouple = "*"
+psycopg-binary = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 black = "*"

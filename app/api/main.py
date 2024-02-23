@@ -1,6 +1,9 @@
 from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
 
+from app.db.database import get_session
 from app.dependencies.pagination import PaginationQuery
+from app.models.api_keys import ApiKeyModel
 from app.repositories.product import ProductRepository
 from app.schemas.product import Product
 
@@ -20,3 +23,12 @@ async def get_products(
 ) -> list[Product]:
     products = await repository.get_by_name(name)
     return products
+
+
+@app.get("/api-key")
+async def create_api_key(db: Session = Depends(get_session)) -> ApiKeyModel:
+    api_key_model = ApiKeyModel()
+    db.add(api_key_model)
+    db.commit()
+    db.refresh(api_key_model)
+    return api_key_model
