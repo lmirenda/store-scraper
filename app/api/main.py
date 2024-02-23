@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 
+from app.dependencies.pagination import PaginationQuery
 from app.repositories.product import ProductRepository
 from app.schemas.product import Product
 
@@ -14,9 +15,8 @@ def read_root():
 @app.get("/products", response_model=list[Product])
 async def get_products(
     repository: ProductRepository = Depends(ProductRepository),
+    pagination: PaginationQuery = Depends(PaginationQuery),
     name: str = None,
-    page: int = 1,
-    limit: int = 10,
 ) -> list[Product]:
     products = await repository.get_by_name(name)
     return products
